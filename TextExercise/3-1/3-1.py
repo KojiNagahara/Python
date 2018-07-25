@@ -4,7 +4,7 @@ while True:
         print('正の整数だって言ってんだろ')
     else:
         break
-# Javaの感覚だとoriginTextはwhile内のローカル変数に見えるけどPythonではそうではないらしい？
+# Javaの感覚だとoriginTextはwhile内のローカル変数に見えるけどPythonではそうではない
 origin = int(originText)
 
 # 演算に使用する変数
