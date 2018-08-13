@@ -6,10 +6,11 @@ pylab.rc('font', **font)
 pylab.figure(1)
 min = -3
 max = 4
-y1 = [x1**2 for x1 in range(min,max)]
-y2 = [x2**3 for x2 in range(min,max)]
-pylab.plot(range(min,max), y1, color='red')
-pylab.plot(range(min,max), y2, color='blue', linestyle='dashed')
+xRange = range(min,max)
+y1 = [x1**2 for x1 in xRange]
+y2 = [x2**3 for x2 in xRange]
+pylab.plot(xRange, y1, color='red')
+pylab.plot(xRange, y2, color='blue', linestyle='dashed')
 
 #個別にフォントを指定する場合の記述
 #igfont = {'family':'Noto Serif CJK JP'}
