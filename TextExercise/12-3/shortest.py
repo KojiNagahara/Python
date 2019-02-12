@@ -29,7 +29,7 @@ def DFS(graph, start, end, path, shortest, toPrint=False):
     return shortest
 
 def shortestPath(graph, start, end, toPrint=False):
-    """最短経路探索用のインターフェース。
+    """DFSの最短経路探索用のインターフェース。
        graphはDigraphオブジェクト、startとendはNodeオブジェクトとし、
        toPrintで途中経過を表示するかどうか制御する。"""
     return DFS(graph, start, end, [], None, toPrint)
