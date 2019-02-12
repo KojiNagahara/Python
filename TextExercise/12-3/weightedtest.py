@@ -1,6 +1,6 @@
 from node import Node, WeightedEdge
 from weightedGraph import WeightedGraph
-from shortest import weightedBFS, printWeightedPath, getWeight
+from shortest import weightedBFS, printWeightedPath
 
 def testSP():
     nodes = []
