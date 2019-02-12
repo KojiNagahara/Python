@@ -1,20 +1,7 @@
-"""力づくで解くアルゴリズムの実装"""
+"""力づく実装のテスト用モジュール"""
 from item import Item
 from util import genPowerset
-
-def chooseBest(pSet, maxWeight, getVal, getWeight):
-    bestVal = 0.0
-    bestSet = None
-    for items in pSet:
-        itemsVal = 0.0
-        itemsWeight = 0.0
-        for item in items:
-            itemsVal += getVal(item)
-            itemsWeight += getWeight(item)
-        if itemsWeight <= maxWeight and itemsVal > bestVal:
-            bestVal = itemsVal
-            bestSet = items
-    return (bestSet, bestVal)
+from chooser import chooseBest
 
 def buildItems():
     """データ初期化"""
@@ -27,7 +14,7 @@ def buildItems():
         items.append(Item(names[i], values[i], weights[i]))
     return items
 
-def test(maxWeight = 20):
+def test(maxWeight=20):
     items = buildItems()
     pSet = genPowerset(items)
     taken, val = chooseBest(pSet, maxWeight, Item.getValue, Item.getWeight)
@@ -37,3 +24,5 @@ def test(maxWeight = 20):
         print(item)
 
 test()
+test(5)
+test(100)
