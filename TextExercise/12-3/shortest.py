@@ -85,9 +85,9 @@ def weightedBFS(graph, start, end, toPrint=False):
             if bestWeight == 0.0 or tmpWeight < bestWeight:
                 bestPath = tmpPath
                 bestWeight = tmpWeight
-        for nextNode, nextWeight in graph.childrenOf(lastNode):
+        for nextNode in graph.childrenOf(lastNode):
             if nextNode not in tmpPath:
-                newPath = tmpPath + [(nextNode, nextWeight)]
+                newPath = tmpPath + [nextNode]
                 pathQueue.append((newPath))
     
     return (bestPath, bestWeight)
