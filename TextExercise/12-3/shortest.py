@@ -15,7 +15,7 @@ def printWeightedPath(path):
     for i in range(len(path)):
         result = result + str(path[i][0])
         if i != len(path)-1:
-            result = result + '->(' + str(path[i+1][1]) + ')'
+            result = result + '->(' + str(path[i+1][1]) + ')->'
     return result
 
 def getWeight(path):
@@ -79,7 +79,7 @@ def weightedBFS(graph, start, end, toPrint=False):
         tmpPath = pathQueue.pop(0)
         if toPrint:
             print('現在の重み付きBFS path', printWeightedPath(tmpPath))
-        lastNode, lastWeight = tmpPath[-1]
+        lastNode = tmpPath[-1][0]
         if lastNode == end:
             tmpWeight = getWeight(tmpPath)
             if bestWeight == 0.0 or tmpWeight < bestWeight:
