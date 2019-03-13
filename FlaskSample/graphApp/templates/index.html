@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8, shrink-to-fit=no">
+
+  <title>指定された式でグラフを描画</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+  <!-- original CSS -->
+
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>パラメータ指定部</h1>
+      <form action="/graph/" method="POST">
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="expression">式（Pythonで処理可能な式を記述してください）</label>
+            <input type="text" class="form-control" id="expression" placeholder="a*x**2+b*x+c" value="{{ expression }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md2">
+            <label for="a_value">aの値(省略時1)</label>
+            <input type="number" class="form-control" id="a_value" placeholder="1">
+          </div>
+          <div class="form-group col-md2">
+            <label for="b_value">bの値(省略時1)</label>
+            <input type="number" class="form-control" id="b_value" placeholder="1">
+          </div>
+          <div class="form-group col-md2">
+            <label for="c_value">cの値(省略時1)</label>
+            <input type="number" class="form-control" id="c_value" placeholder="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md2">
+            <label for="x_start">x軸の開始値(省略時0)</label>
+            <input type="number" class="form-control" id="x_start" placeholder="0">
+          </div>
+          <div class="form-group col-md2">
+            <label for="x_end">x軸の終了値(省略時10)</label>
+            <input type="number" class="form-control" id="x_end" placeholder="10">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="submit" value="描画">
+          </div>
+        </div>
+      </form>
+    </header>
+
+    <main>
+      <h1>グラフ</h1>
+      <img id="graphImage" src="data:image/png:base64,{{ graphData }}">
+    </main>
+
+    <!-- 以下にBootstrap用のJavaScriptを記述します -->
+    <!-- jQueryの後にBootstrap JS(popper.jsバンドル版)を読み込む -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
+  </div>
+</body>
+
+</html>
