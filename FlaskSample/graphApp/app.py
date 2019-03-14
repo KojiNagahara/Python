@@ -1,16 +1,19 @@
 from flask import Flask, render_template, request
+from flask_wtf.csrf import CSRFProtect
 import numpy as np
 from io import BytesIO
 import urllib
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 import numpy as np
+from graph_form import GraphForm
 
 app = Flask(__name__)
+app.secret_key = "graphApp"
+csrf = CSRFProtect(app)
 
 def draw_graph(expression="a*(x**2)+b*x+c", 
-    param={'a_value':1,'b_value':1,'c_value':1}, 
-    start=0, end=10):
+    param={'a_value':1,'b_value':1,'c_value':1, 'start':0, 'end':10}):
     """グラフの画像データを生成する。
        expressionには入力された式の文字列が、
        paramには入力されたパラメータを収めたDictionaryが、
@@ -20,11 +23,13 @@ def draw_graph(expression="a*(x**2)+b*x+c",
     # 今回は1つしかグラフを書かないので行=列=1、indexも1
     ax = fig.add_subplot(111)
     # X軸の範囲は指定されているので等差数列（要素100の配列で始点、終点を含む）を生成
+    start = param.get('start', 0)
+    end = param.get('end', 10)
     x = np.linspace(start, end, 100)
     # 与えられたパラメータと式の評価結果によりグラフのY軸の数列を生成
-    a = param['a_value']
-    b = param['b_value']
-    c = param['c_value']
+    a = param.get('a_value', 1)
+    b = param.get('b_value', 1)
+    c = param.get('c_value', 1)
     y = eval(expression)
     # グラフを描画
     ax.plot(x, y)
@@ -40,12 +45,27 @@ def index():
     """GETは初回アクセス時の処理。
        POSTはパラメータ入力後の処理。
        初回表示時にデフォルトの式と各デフォルトパラメータによって描画されるグラフをセットして表示"""
+    form = GraphForm()
     if request.method == 'POST':
-        graph_data = draw_graph()
-        return render_template('index.html', graphData=graph_data) 
+        # 入力のバリデーション
+        if form.validate_on_submit():
+            print("バリデーション成功")
+            graph_data = draw_graph(form.expression.data, form.get_param())
+        else:
+            print("バリデーション失敗")
+            graph_data = None
+
+        return render_template('index.html', form=form, graphData=graph_data) 
     else:
         # デフォルトデータを使用してグラフを描画する
-        return render_template('index.html', expression='a*(x**2)+b*x+c', graphData=draw_graph())
+        form.expression.data = 'a*(x**2)+b*x+c'
+        form.a_value.data = 1
+        form.b_value.data = 1
+        form.c_value.data = 1
+        form.x_start.data = 0
+        form.x_end.data = 10
+
+        return render_template('index.html', form=form, graphData=draw_graph())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
