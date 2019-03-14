@@ -17,26 +17,6 @@ class GraphForm(FlaskForm):
       print('check1')
       raise ValidationError("式は必須入力です")
 
-  def validate_a_value(self, a_value):
-    if a_value.data == None:
-      a_value.data = 1
-
-  def validate_b_value(self, b_value):
-    if b_value.data == None:
-      b_value.data = 1
-
-  def validate_c_value(self, c_value):
-    if c_value.data == None:
-      c_value.data = 1
-
-  def validate_x_start(self, x_start):
-    if x_start.data == None:
-      x_start.data = 0
-
-  def validate_x_end(self, x_end):
-    if x_end.data == None:
-      x_end.data = 10
-
   def get_param(self):
     param = {}
     param['a_value'] = self.a_value.data
