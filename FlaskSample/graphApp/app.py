@@ -2,14 +2,16 @@ from flask import Flask, render_template, request
 from flask_wtf.csrf import CSRFProtect
 import numpy as np
 from io import BytesIO
+import logging
+import logging.handlers
 import urllib
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
-import numpy as np
 from graph_form import GraphForm
 
 app = Flask(__name__)
 app.secret_key = "graphApp"
+# CSRFトークン処理を有効にする
 csrf = CSRFProtect(app)
 
 def draw_graph(expression="a*(x**2)+b*x+c", 
@@ -49,14 +51,20 @@ def index():
     if request.method == 'POST':
         # 入力のバリデーション
         if form.validate_on_submit():
-            print("バリデーション成功")
-            graph_data = draw_graph(form.expression.data, form.get_param())
+            app.logger.info("バリデーション成功")
+            try:
+                graph_data = draw_graph(form.expression.data, form.get_param())
+            except ValueError as error:
+                app.logger.error("グラフ生成失敗")
+                app.logger.error(error)
+                graph_data = None
         else:
-            print("バリデーション失敗")
+            app.logger.info("バリデーション失敗")
             graph_data = None
 
         return render_template('index.html', form=form, graphData=graph_data) 
     else:
+        app.logger.info("初期表示")
         # デフォルトデータを使用してグラフを描画する
         form.expression.data = 'a*(x**2)+b*x+c'
         form.a_value.data = 1

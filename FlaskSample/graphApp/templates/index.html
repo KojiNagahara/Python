@@ -29,7 +29,7 @@
             {% endfor %}
 
             {{ form.expression.label }}
-            {{ form.expression(class="form-control", placeholder="a*x**2+b*x+c") }}
+            {{ form.expression(class="form-control", placeholder="a*(x**2)+b*x+c") }}
           </div>
         </div>
         <div class="form-row">
@@ -83,7 +83,9 @@
       <h1>グラフ</h1>
       <div>
         {% if graphData != None %}
-        <img id="graphImage" src="data:image/png:base64,{{ graphData }}">
+          <img id="graphImage" src="data:image/png:base64,{{ graphData }}">
+        {% else %}
+          <div style="color: red;">グラフの描画に失敗しました</div>
         {% endif %}
       </div>
     </main>
