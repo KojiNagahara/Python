@@ -30,7 +30,7 @@ def big_test(number_of_items):
   for item in items:
     print(item)
   
-  value, taken = max_value(items, 1000)
+  value, taken = max_value(items, 100)
   print('取得Item：')
   for item in taken:
     print(item)
@@ -43,7 +43,7 @@ def big_test_fast(number_of_items):
   for item in items:
     print(item)
   
-  value, taken = max_value_fast(items, 1000)
+  value, taken = max_value_fast(items, 100)
   print('取得Item：')
   for item in taken:
     print(item)
@@ -52,6 +52,6 @@ def big_test_fast(number_of_items):
 print('small_testの実施結果')
 small_test()
 print('big_testの実施結果')
-big_test(100)
+big_test(20)
 print('big_test_fastの実施結果')
-big_test_fast(100)
+big_test_fast(20)
