@@ -1,7 +1,7 @@
 """動的計画法の実装をテストするモジュール。"""
 import random
 from item import Item
-from rootedBinaryTree import max_value
+from rootedBinaryTree import max_value, max_value_fast
 
 def small_test():
   """小規模テスト"""
@@ -30,7 +30,20 @@ def big_test(number_of_items):
   for item in items:
     print(item)
   
-  value, taken = max_value(items, 10)
+  value, taken = max_value(items, 1000)
+  print('取得Item：')
+  for item in taken:
+    print(item)
+  print(f'取得したItemの総価値：{value}')
+
+def big_test_fast(number_of_items):
+  """大規模テスト。ただあまり大規模になると視認性が悪くなるので少し表示に工夫する必要はある"""
+  items = build_many_items(number_of_items, 10, 10)
+  print('対象Item：')
+  for item in items:
+    print(item)
+  
+  value, taken = max_value_fast(items, 1000)
   print('取得Item：')
   for item in taken:
     print(item)
@@ -39,4 +52,6 @@ def big_test(number_of_items):
 print('small_testの実施結果')
 small_test()
 print('big_testの実施結果')
-big_test(20)
+big_test(100)
+print('big_test_fastの実施結果')
+big_test_fast(100)
