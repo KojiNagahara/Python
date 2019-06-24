@@ -31,15 +31,14 @@ def build_many_items(number_of_items, max_value, max_weight):
     items.append(Item(str(i), random.randint(1, max_value), random.randint(1, max_value)))
   return items
 
-def big_test(number_of_items, chooser):
+def big_test(items):
   """大規模テスト。ただあまり大規模になると結果の視認性が悪くなるので少し表示に工夫したい"""
   start = time.perf_counter()
-  items = build_many_items(number_of_items, 10, 10)
   print('対象Item：')
   for item in items:
     print(item)
   
-  value, taken = chooser(items, 100)
+  value, taken = max_value(items, 100)
   elapsed = time.perf_counter() - start
   print('取得Item：')
   for item in taken:
@@ -47,11 +46,29 @@ def big_test(number_of_items, chooser):
   print(f'取得したItemの総価値：{value}')
   print(f'処理にかかった時間:{elapsed}')
 
+def big_test_fast(items):
+  """大規模テスト。small_testと同様の実装方針だとmax_value_fastのキャッシュが残ってしまってできなかった"""
+  start = time.perf_counter()
+  print('対象Item：')
+  for item in items:
+    print(item)
+  
+  value, taken = max_value_fast(items, 100, {})
+  elapsed = time.perf_counter() - start
+  print('取得Item：')
+  for item in taken:
+    print(item)
+  print(f'取得したItemの総価値：{value}')
+  print(f'処理にかかった時間:{elapsed}')
+
+
 print('small_testの実施結果')
 small_test(max_value)
 print('高速化したアルゴリズムを用いたsmall_testの実施結果')
 small_test(max_value_fast)
+
+items = build_many_items(20, 10, 10)
 print('big_testの実施結果')
-big_test(20, max_value)
+big_test(items)
 print('高速化したアルゴリズムを用いたbig_testの実施結果')
-big_test(20, max_value_fast)
+big_test_fast(items)
