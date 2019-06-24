@@ -5,34 +5,34 @@ from node import WeightedEdge
 class WeightedGraph(object):
     """edgesのDictionaryのvalueをtupleで実装"""
     def __init__(self):
-        self.nodes = []
-        self.edges = {}
+        self._nodes = []
+        self._edges = {}
 
     def addNode(self, node):
-        if node in self.nodes:
+        if node in self._nodes:
             raise ValueError('Nodeが重複している')
         else:
-            self.nodes.append(node)
-            self.edges[node] = []
+            self._nodes.append(node)
+            self._edges[node] = []
     
     def addEdge(self, edge):
         """edgeがWeightedEdgeであることが前提"""
         src = edge.src
         dest = edge.dest
         weight = edge.weight
-        if not (src in self.nodes and dest in self.nodes):
+        if not (src in self._nodes and dest in self._nodes):
             raise ValueError('Nodeがグラフに含まれていない')
-        self.edges[src].append((dest, weight))
+        self._edges[src].append((dest, weight))
     
     def childrenOf(self, node):
-        return self.edges[node]
+        return self._edges[node]
     
     def hasNode(self, node):
-        return node in self.nodes
+        return node in self._nodes
     
     def __str__(self):
         result = ''
-        for src in self.nodes:
+        for src in self._nodes:
             for dest in self.childrenOf(src):
                 result = result+src.name+'->('+dest[1]+')'+dest[0].name+'\n'
         

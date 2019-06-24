@@ -7,32 +7,32 @@ class Digraph(object):
     #nodesはNodeオブジェクトのList。
     #edgesは各nodeと子ノードへのマップするためのDictionary。
     def __init__(self):
-        self.nodes = []
-        self.edges = {}
+        self._nodes = []
+        self._edges = {}
     
     def addNode(self, node):
-        if node in self.nodes:
+        if node in self._nodes:
             raise ValueError('Nodeが重複している')
         else:
-            self.nodes.append(node)
-            self.edges[node] = []
+            self._nodes.append(node)
+            self._edges[node] = []
     
     def addEdge(self, edge):
         src = edge.src
         dest = edge.dest
-        if not (src in self.nodes and dest in self.nodes):
+        if not (src in self._nodes and dest in self._nodes):
             raise ValueError('Nodeがグラフに含まれていない')
-        self.edges[src].append(dest)
+        self._edges[src].append(dest)
     
     def childrenOf(self, node):
-        return self.edges[node]
+        return self._edges[node]
     
     def hasNode(self, node):
-        return node in self.nodes
+        return node in self._nodes
     
     def __str__(self):
         result = ''
-        for src in self.nodes:
+        for src in self._nodes:
             for dest in self.childrenOf(src):
                 result = result+src.name+'->'+dest.name+'\n'
         
@@ -41,6 +41,6 @@ class Digraph(object):
 class Graph(Digraph):
     """双方向グラフの実装"""
     def addEdge(self, edge):
-        Digraph.addEdge(self, edge)
+        super.addEdge(self, edge)
         rev = Edge(edge.dest, edge.src)
-        Digraph.addEdge(self, rev)
+        super.addEdge(self, rev)
