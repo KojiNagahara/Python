@@ -1,4 +1,4 @@
-"""動的計画法の実装をテストするモジュール。"""
+"""動的計画法のクラス実装をテストするモジュール。"""
 import random
 import time
 from item import Item
@@ -14,7 +14,7 @@ def build_items():
   return items
 
 def build_many_items(number_of_items, max_value, max_weight):
-  """big_test用のデータ作成自動化"""
+  """test用のデータ作成自動化"""
   items = []
   for i in range(number_of_items):
     items.append(Item(str(i), random.randint(1, max_value), random.randint(1, max_value)))
@@ -40,4 +40,4 @@ def test(items, avail):
 print('小規模テスト')
 test(build_items(), 20)
 print('大規模テスト')
-test(build_many_items(20, 10, 10), 100)
+test(build_many_items(20, 10, 10), 50)
