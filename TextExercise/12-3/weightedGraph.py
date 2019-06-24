@@ -17,9 +17,9 @@ class WeightedGraph(object):
     
     def addEdge(self, edge):
         """edgeがWeightedEdgeであることが前提"""
-        src = edge.getSource()
-        dest = edge.getDestination()
-        weight = edge.getWeight()
+        src = edge.src
+        dest = edge.dest
+        weight = edge.weight
         if not (src in self.nodes and dest in self.nodes):
             raise ValueError('Nodeがグラフに含まれていない')
         self.edges[src].append((dest, weight))
@@ -34,6 +34,6 @@ class WeightedGraph(object):
         result = ''
         for src in self.nodes:
             for dest in self.childrenOf(src):
-                result = result+src.getName()+'->('+dest[1]+')'+dest[0].getName()+'\n'
+                result = result+src.name+'->('+dest[1]+')'+dest[0].name+'\n'
         
         return result[:-1]

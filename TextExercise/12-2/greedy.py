@@ -6,8 +6,8 @@ def greedy(items, maxWeight, keyFunction):
     result = []
     totalValue, totalWeight = 0.0, 0.0
     for item in copiedItems:
-        if (totalWeight + item.getWeight()) <= maxWeight:
+        if (totalWeight + item.weight) <= maxWeight:
             result.append(item)
-            totalWeight += item.getWeight()
-            totalValue += item.getValue()
+            totalWeight += item.weight
+            totalValue += item.value
     return result, totalValue

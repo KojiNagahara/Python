@@ -18,8 +18,8 @@ class Digraph(object):
             self.edges[node] = []
     
     def addEdge(self, edge):
-        src = edge.getSource()
-        dest = edge.getDestination()
+        src = edge.src
+        dest = edge.dest
         if not (src in self.nodes and dest in self.nodes):
             raise ValueError('Nodeがグラフに含まれていない')
         self.edges[src].append(dest)
@@ -34,7 +34,7 @@ class Digraph(object):
         result = ''
         for src in self.nodes:
             for dest in self.childrenOf(src):
-                result = result+src.getName()+'->'+dest.getName()+'\n'
+                result = result+src.name+'->'+dest.name+'\n'
         
         return result[:-1]
 
@@ -42,5 +42,5 @@ class Graph(Digraph):
     """双方向グラフの実装"""
     def addEdge(self, edge):
         Digraph.addEdge(self, edge)
-        rev = Edge(edge.getDestination(), edge.getSource())
+        rev = Edge(edge.dest, edge.src)
         Digraph.addEdge(self, rev)

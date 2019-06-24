@@ -2,6 +2,7 @@
 from item import Item
 from util import genPowerset
 from chooser import chooseBest
+import time
 
 def buildItems():
     """データ初期化"""
@@ -15,13 +16,17 @@ def buildItems():
     return items
 
 def test(maxWeight=20):
+    start = time.perf_counter()
     items = buildItems()
     pSet = genPowerset(items)
-    taken, val = chooseBest(pSet, maxWeight, Item.getValue, Item.getWeight)
+    taken, val = chooseBest(pSet, maxWeight)
+    elapsed = time.perf_counter() - start
     print('取得した品物の価値:'+str(val))
     print('取得した品物:')
     for item in taken:
         print(item)
+    print(f'処理にかかった時間:{elapsed}')
+
 
 test()
 test(5)

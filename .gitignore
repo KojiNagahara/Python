@@ -1,0 +1,5 @@
+FlaskSample/*/__pycache__/*
+.vscode/launch.json
+.vscode/settings.json
+TextExercise/*/__pycache__/*
+TextExercise/*/*/__pycache__/*

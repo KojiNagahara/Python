@@ -9,11 +9,11 @@ def flip(number):
       heads += 1
   return heads/number
 
-def simulate(number_for_trial, trial_number):
+def simulate(flip_number, trial_number):
   """number_for_trial、trial_numberともに正の整数"""
   frac_heads = []
   for i in range(trial_number):
-    frac_heads.append(flip(number_for_trial))
+    frac_heads.append(flip(flip_number))
   mean = sum(frac_heads)/len(frac_heads)
   return mean
 

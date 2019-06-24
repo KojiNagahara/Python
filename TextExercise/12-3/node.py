@@ -4,9 +4,6 @@ class Node(object):
     def __init__(self, name):
         self.name = name
     
-    def getName(self):
-        return self.name
-    
     def __str__(self):
         return self.name
 
@@ -16,14 +13,8 @@ class Edge(object):
         self.src = src
         self.dest = dest
     
-    def getSource(self):
-        return self.src
-    
-    def getDestination(self):
-        return self.dest
-    
     def __str__(self):
-        return self.src.getName()+"->"+self.dest.getName()
+        return self.src.name+"->"+self.dest.name
 
 class WeightedEdge(Edge):
     def __init__(self, src, dest, weight=1.0):
@@ -31,8 +22,5 @@ class WeightedEdge(Edge):
         Edge.__init__(self, src, dest)
         self.weight = weight
     
-    def getWeight(self):
-        return self.weight
-    
     def __str__(self):
-        return self.src.getName()+"->("+self.getWeight()+")"+self.dest.getName()
+        return self.src.name+"->("+self.weight+")"+self.dest.name

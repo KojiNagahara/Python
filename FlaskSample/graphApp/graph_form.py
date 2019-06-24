@@ -17,7 +17,7 @@ class GraphForm(FlaskForm):
     if expression.data == '':
       raise ValidationError('式は必須入力です')
     
-    pattern = '[^0-9a-cx\+\-\*\/%()\.]'
+    pattern = '[^0-9abcx\+\-\*\/%()\.]'
     if re.match(pattern, expression.data):
       raise ValidationError('有効な式を指定してください')
     

@@ -24,9 +24,11 @@ def draw_graph(expression="a*(x**2)+b*x+c",
     fig = Figure()
     # 今回は1つしかグラフを書かないので行=列=1、indexも1
     ax = fig.add_subplot(111)
+
     # X軸の範囲は指定されているので等差数列（要素100の配列で始点、終点を含む）を生成
     start = param.get('start', 0)
     end = param.get('end', 10)
+    
     x = np.linspace(start, end, 100)
     # 与えられたパラメータと式の評価結果によりグラフのY軸の数列を生成
     a = param.get('a_value', 1)
@@ -47,7 +49,7 @@ def index():
     """GETは初回アクセス時の処理。
        POSTはパラメータ入力後の処理。
        初回表示時にデフォルトの式と各デフォルトパラメータによって描画されるグラフをセットして表示"""
-    form = GraphForm()
+    form = GraphForm(request.form, meta={'locales': ['ja']})
     if request.method == 'POST':
         # 入力のバリデーション
         if form.validate_on_submit():
