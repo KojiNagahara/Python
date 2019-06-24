@@ -1,12 +1,11 @@
 from node import Node, Edge
-from graph import Digraph
+from graph import Digraph,Graph
 from shortest import shortestPath, printPath, BFS
 
-def testSP():
+def testShortestPath(g):
     nodes = []
     for name in range(6):
         nodes.append(Node('ノード'+str(name)))
-    g = Digraph()
     for n in nodes:
         g.addNode(n)
     g.addEdge(Edge(nodes[0], nodes[1]))
@@ -24,4 +23,8 @@ def testSP():
     sp = BFS(g, nodes[0], nodes[5], toPrint=True)
     print('BFSで発見された最短経路:', printPath(sp))
 
-testSP()
+print('単方向グラフの最短経路探索')
+testShortestPath(Digraph())
+print('双方向グラフの最短経路探索')
+testShortestPath(Graph())
+

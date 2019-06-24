@@ -41,6 +41,6 @@ class Digraph(object):
 class Graph(Digraph):
     """双方向グラフの実装"""
     def addEdge(self, edge):
-        super.addEdge(self, edge)
+        Digraph.addEdge(self, edge)
         rev = Edge(edge.dest, edge.src)
-        super.addEdge(self, rev)
+        Digraph.addEdge(self, rev)
