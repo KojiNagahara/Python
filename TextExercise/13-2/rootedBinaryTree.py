@@ -12,12 +12,12 @@ def max_value(to_consider, avail):
   else:
     next_item = to_consider[0]
     # 左側の分岐を探索する
-    with_value, with_to_take = max_value(to_consider[1:], avail-next_item.weight)
+    with_value, with_to_take = max_value(to_consider[1:], avail - next_item.weight)
     with_value += next_item.value
     # 右側の分岐を探索する
     without_value, without_to_take = max_value(to_consider[1:], avail)
     if with_value > without_value:
-      result = (with_value, with_to_take+[next_item,])
+      result = (with_value, with_to_take + [next_item,])
     else:
       result = (without_value, without_to_take)
 
@@ -36,12 +36,12 @@ def max_value_fast(to_consider, avail, memo = {}):
   else:
     next_item = to_consider[0]
     # 左側の分岐を探索する
-    with_value, with_to_take = max_value_fast(to_consider[1:], avail-next_item.weight, memo)
+    with_value, with_to_take = max_value_fast(to_consider[1:], avail - next_item.weight, memo)
     with_value += next_item.value
     # 右側の分岐を探索する
     without_value, without_to_take = max_value_fast(to_consider[1:], avail, memo)
     if with_value > without_value:
-      result = (with_value, with_to_take+[next_item,])
+      result = (with_value, with_to_take + [next_item,])
     else:
       result = (without_value, without_to_take)
 
