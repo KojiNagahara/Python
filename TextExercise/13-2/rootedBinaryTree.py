@@ -23,6 +23,7 @@ def max_value(to_consider, avail):
     with_value += next_item.value
     # 右側の分岐を探索する
     without_value, without_to_take = max_value(to_consider[1:], avail)
+    # 左側と右側の探索結果でより価値の高い方を採用する
     if with_value > without_value:
       result = (with_value, with_to_take + [next_item,])
     else:
@@ -47,6 +48,7 @@ def max_value_fast(to_consider, avail, memo = {}):
     with_value += next_item.value
     # 右側の分岐を探索する
     without_value, without_to_take = max_value_fast(to_consider[1:], avail, memo)
+    # 左側と右側の探索結果でより価値の高い方を採用する
     if with_value > without_value:
       result = (with_value, with_to_take + [next_item,])
     else:
